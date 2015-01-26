@@ -8,7 +8,7 @@ module Embulk
     def self.transaction(config, schema, processor_count, &control)
       task = {
         'host' => config.param('host', :string),
-        'port' => config.param('port', :string, default: 5432),
+        'port' => config.param('port', :int, default: 5432),
         'username' => config.param('username', :string),
         'password' => config.param('password', :string, default: ''),
         'database' => config.param('database', :string),
@@ -84,7 +84,7 @@ module Embulk
     end
 
     def add(page)
-      prep = @pg.prepareStatement(%[insert into "#{@task['temp_table']}" (#{@task['column']}) values (?::json)])
+      prep = @pg.prepareStatement(%[insert into "#{@task['temp_table']}" (#{@task['column']}) values (?::#{@task['column_type']})])
       begin
         page.each do |record|
           prep.setString(1, record.to_json)

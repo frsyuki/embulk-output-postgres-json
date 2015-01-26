@@ -8,7 +8,7 @@ module Embulk
     def self.transaction(config, schema, processor_count, &control)
       task = {
         'host' => config.param('host', :string),
-        'port' => config.param('port', :int, default: 5432),
+        'port' => config.param('port', :integer, default: 5432),
         'username' => config.param('username', :string),
         'password' => config.param('password', :string, default: ''),
         'database' => config.param('database', :string),

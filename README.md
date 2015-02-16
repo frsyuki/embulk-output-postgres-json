@@ -8,6 +8,12 @@ This works as following:
 2. run: insert records to the temporary table
 3. transaction commit: copy the records to the actual table and drop the temporary table
 
+## Overview
+
+* **Plugin type**: output
+* **Load all or nothing**: yes
+* **Resume supported**: no
+
 ## Configuration
 
 - **host** host name of the PostgreSQL server (string, required)

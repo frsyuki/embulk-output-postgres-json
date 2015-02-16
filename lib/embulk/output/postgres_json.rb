@@ -2,14 +2,14 @@ module Embulk
   require 'jdbc/postgres'
   Jdbc::Postgres.load_driver
 
-  class OutputPostgresJson < OutputPlugin
+  class PostgresJsonOutputPlugin < OutputPlugin
     Plugin.register_output('postgres_json', self)
 
     def self.transaction(config, schema, processor_count, &control)
       task = {
         'host' => config.param('host', :string),
         'port' => config.param('port', :integer, default: 5432),
-        'username' => config.param('username', :string),
+        'username' => config.param('user', :string),
         'password' => config.param('password', :string, default: ''),
         'database' => config.param('database', :string),
         'table' => config.param('table', :string),
